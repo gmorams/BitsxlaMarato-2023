@@ -60,12 +60,12 @@ svm_classifier = SVC(kernel='rbf', C=c,gamma=g, class_weight='balanced')
 # Train the SVM classifier on the training data
 svm_classifier.fit(X_train_pca, y_train)
 # Make predictions on the testing data
-            predictions = svm_classifier.predict(X_test_pca)
-            #print(predictions)
+predictions = svm_classifier.predict(X_test_pca)
+#print(predictions)
 
-            # Evaluate the accuracy of the model
-            accuracy = accuracy_score(y_test, predictions)
-            print("C = ", c)
-            print("comp = ", comp)
-            print("gamma = ", g)
-            print(f"Accuracy: {accuracy * 100:.2f}%")
+# Evaluate the accuracy of the model
+accuracy = accuracy_score(y_test, predictions)
+print("C = ", c)
+print("comp = ", comp)
+print("gamma = ", g)
+print(f"Accuracy: {accuracy * 100:.2f}%")
