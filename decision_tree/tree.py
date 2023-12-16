@@ -6,6 +6,7 @@ from sklearn.metrics import accuracy_score
 import pandas as pd
 import numpy as np
 from sklearn.decomposition import PCA
+from matplotlib import pyplot as plt
 
 PYLUM = '../data/ilumina_pylum.csv'
 FAMILY = '../data/iluma-family_level.csv'
@@ -31,12 +32,13 @@ X_test_pca = pca.transform(X_test)
 tree_classifier = DecisionTreeClassifier(max_depth=4)
 
 # Train the SVM classifier on the training data
-tree_classifier.fit(X_train_pca, y_train)
+tree_classifier.fit(X_train, y_train)
 # Make predictions on the testing data
-predictions = tree_classifier.predict(X_test_pca)
+predictions = tree_classifier.predict(X_test)
 #print(predictions)
 
 # Evaluate the accuracy of the model
 accuracy = accuracy_score(y_test, predictions)
 print(f"Accuracy: {accuracy * 100:.2f}%")
 tree.plot_tree(tree_classifier)
+plt.show()
