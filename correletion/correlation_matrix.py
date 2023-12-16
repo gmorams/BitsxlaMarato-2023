@@ -5,14 +5,16 @@ import numpy as np
 
 
 
-THRESHOLD_CON_PYLUM = .005
-THRESHOLD_UAB_PYLUM = .02
+THRESHOLD_CON_PYLUM = 0
+THRESHOLD_UAB_PYLUM = 0
 
-THRESHOLD_CON_FAMILY = 5
-THRESHOLD_UAB_FAMILY= 15
+THRESHOLD_CON_FAMILY = 1.4
+THRESHOLD_UAB_FAMILY= 9.5
 
-THRESHOLD_CON_GENUS = 3.5
-THRESHOLD_UAB_GENUS = 14
+THRESHOLD_CON_GENUS = 2.45
+THRESHOLD_UAB_GENUS = 10.6246
+
+THRESHOLD_CORRELATION = .4
 
 UAB = 'UAB'
 CON = 'CON'
@@ -58,33 +60,21 @@ def crea_mat_corr(df, cas, threshold):
 
     correlation_matrix = filtered_df.corr()
 
-    correlation_matrix_filtered = correlation_matrix[correlation_matrix.abs() >= .5]
-
-    to_drop = correlation_matrix_filtered.stack().index.tolist()
-
-    print(to_drop)
-
-    #sns.heatmap(correlation_matrix, annot=True, cmap='coolwarm', fmt='.2f', linewidths=0.5)
-    #plt.show()
-
     cor_matrix = filtered_df.corr().abs()
-    #print(); print(cor_matrix)
 
     # Selecting upper triangle of correlation matrix
     upper_tri = cor_matrix.where(np.triu(np.ones(cor_matrix.shape),
                                       k=1).astype(bool))
-    #print(); print(upper_tri)
+    print(); print(upper_tri)
 
     # Finding index of feature columns with correlation greater than 0.95
-    to_drop = [column for column in upper_tri.columns if any(upper_tri[column] > 0.80)]
-    print("to drop"); print(to_drop)
+    to_keep = [column for column in upper_tri.columns if any((THRESHOLD_CORRELATION < cor_matrix[column]) & (cor_matrix[column] < 1))]
+    print("to drop"); print(to_keep)
 
     # Droping Marked Features
-    df1 = df.drop(df.columns[to_drop], axis=1)
-    print(); print(df1.head())
+    df1 = filtered_df[to_keep]
+    print(); print(df1)
 
-
-    
     correlation_matrix = df1.corr()
 
     sns.heatmap(correlation_matrix, annot=True, cmap='coolwarm', fmt='.2f', linewidths=0.5)
@@ -92,7 +82,7 @@ def crea_mat_corr(df, cas, threshold):
     
 
 
-df = pd.read_csv(PYLUM)
+df = pd.read_csv(GENUS)
 #crea_mat_threshold(df, UAB, THRESHOLD_UAB_PYLUM)
 
-crea_mat_corr(df, UAB, THRESHOLD_UAB_PYLUM)
+crea_mat_corr(df, CON, THRESHOLD_CON_GENUS)
