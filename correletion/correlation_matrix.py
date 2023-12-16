@@ -1,6 +1,7 @@
 import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
+import numpy as np
 
 
 
@@ -59,10 +60,37 @@ def crea_mat_corr(df, cas, threshold):
 
     correlation_matrix_filtered = correlation_matrix[correlation_matrix.abs() >= .5]
 
-    above_threshold_names = correlation_matrix_filtered.stack().index.tolist()
+    to_drop = correlation_matrix_filtered.stack().index.tolist()
 
-    sns.heatmap(correlation_matrix_filtered, annot=True, cmap='coolwarm', fmt='.2f', linewidths=0.5)
+    print(to_drop)
+
+    #sns.heatmap(correlation_matrix, annot=True, cmap='coolwarm', fmt='.2f', linewidths=0.5)
+    #plt.show()
+
+    cor_matrix = filtered_df.corr().abs()
+    #print(); print(cor_matrix)
+
+    # Selecting upper triangle of correlation matrix
+    upper_tri = cor_matrix.where(np.triu(np.ones(cor_matrix.shape),
+                                      k=1).astype(bool))
+    #print(); print(upper_tri)
+
+    # Finding index of feature columns with correlation greater than 0.95
+    to_drop = [column for column in upper_tri.columns if any(upper_tri[column] > 0.80)]
+    print("to drop"); print(to_drop)
+
+    # Droping Marked Features
+    df1 = df.drop(df.columns[to_drop], axis=1)
+    print(); print(df1.head())
+
+
+    
+    correlation_matrix = df1.corr()
+
+    sns.heatmap(correlation_matrix, annot=True, cmap='coolwarm', fmt='.2f', linewidths=0.5)
     plt.show()
+    
+
 
 df = pd.read_csv(PYLUM)
 #crea_mat_threshold(df, UAB, THRESHOLD_UAB_PYLUM)
