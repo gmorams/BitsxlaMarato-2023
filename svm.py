@@ -14,17 +14,18 @@ GENUS = 'data/iluma-genus.csv'
 df = pd.read_csv(FAMILY)
 df['Sample ID'] = df['Sample ID'].apply(lambda x: x[:3])
 X = df.drop(columns=['Sample ID'])
+X = X[['']]
 y = df['Sample ID']
 
 
 # Split the dataset into training and testing sets
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.5, random_state=42)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
 print(len(y_train), len(y_test))
 
 # Apply PCA for dimensionality reduction
 
-"""
+
 # Create an SVM classifier
 for comp in np.linspace(2,20,19):
     n_components = int(comp)  # Adjust the number of components as needed
@@ -55,17 +56,17 @@ pca = PCA(n_components=n_components)
 X_train_pca = pca.fit_transform(X_train)
 X_test_pca = pca.transform(X_test)
 
-svm_classifier = SVC(kernel='rbf', C=c,gamma=g, class_weight='balanced')
+svm_classifier = SVC(kernel='rbf', C=3.4,gamma=0.23, class_weight='balanced')
 
 # Train the SVM classifier on the training data
 svm_classifier.fit(X_train_pca, y_train)
 # Make predictions on the testing data
-            predictions = svm_classifier.predict(X_test_pca)
-            #print(predictions)
+predictions = svm_classifier.predict(X_test_pca)
+print(predictions)
+print(y_test)
 
-            # Evaluate the accuracy of the model
-            accuracy = accuracy_score(y_test, predictions)
-            print("C = ", c)
-            print("comp = ", comp)
-            print("gamma = ", g)
-            print(f"Accuracy: {accuracy * 100:.2f}%")
+# Evaluate the accuracy of the model
+accuracy = accuracy_score(y_test, predictions)
+
+print(f"Accuracy: {accuracy * 100:.2f}%")
+"""
