@@ -13,7 +13,7 @@ from sklearn.neighbors import NearestNeighbors
 # from sklearn.cluster import KMeans
 # import scipy.cluster.hierarchy as sch
 
-df = pd.read_csv('data/genus_level.csv')
+df = pd.read_csv('data/ilumina_pylum.csv')
 df.set_index('Sample ID', inplace=True)
 
 # OPCIÓ 1:
@@ -32,13 +32,14 @@ def DBSCAN_clustering(dd):
         n_clusters_ = len(set(labels)) - (1 if -1 in labels else 0)
         n_noise_ = list(labels).count(-1)
         n_clust.append(n_clusters_)
+        print(i, n_clusters_)
     plt.plot(n_clust)
     # plt.xlabel('Data Point Index')
     # plt.ylabel('Epsilon (distance to kth nearest neighbor)')
     plt.savefig('clusters')
     # Max number of clusters: 4 at epsilon 22
 
-    clustering = DBSCAN(eps=25).fit(dd)
+    clustering = DBSCAN(eps=9).fit(dd)
     labels = clustering.labels_
     
     clusters = {'UAB': {i:0 for i in range(-1,4)}, 'CON': {i:0 for i in range(-1,4)}}
@@ -48,11 +49,5 @@ def DBSCAN_clustering(dd):
         clusters[dd.index[i][:3]][label] += 1
     print('CLUSTERS UAB:',clusters['UAB'])
     print('CLUSTERS CON:',clusters['CON'])
-
-            
-        
-
-
-
-
+y
 DBSCAN_clustering(df)
