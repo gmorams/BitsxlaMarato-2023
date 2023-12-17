@@ -32,3 +32,18 @@ En els directoris del repositori es pot trobar:
 
 `src` els codis fets en python
 
+
+<br/><br/>
+Gràfiques obtingudes dels resultats:
+
+![correlation_graph_CON-family](https://github.com/peremateu/BitsxlaMarato2023/assets/95536223/7016c21a-d21c-46d1-8672-e998889e4e9b)
+
+![corr_mat-CON](https://github.com/peremateu/BitsxlaMarato2023/assets/95536223/282b429f-2f63-4756-8bcb-16f2cf28ff33)
+
+![grafConectat](https://github.com/peremateu/BitsxlaMarato2023/assets/95536223/d34c6c6c-0043-43be-8dc4-83a1322aaaa7)
+
+
+
+
+
+
