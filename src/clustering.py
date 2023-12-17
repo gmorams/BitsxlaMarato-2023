@@ -13,7 +13,7 @@ from sklearn.neighbors import NearestNeighbors
 # from sklearn.cluster import KMeans
 # import scipy.cluster.hierarchy as sch
 
-df = pd.read_csv('data/ilumina_pylum.csv')
+df = pd.read_csv('../data/ilumina_pylum.csv')
 df.set_index('Sample ID', inplace=True)
 
 # OPCIÓ 1:

@@ -22,9 +22,9 @@ LOWER_THRESHOLD_CORRELATION = -.25
 UAB = 'UAB'
 CON = 'CON'
 
-PYLUM = 'data/ilumina_pylum.csv'
-FAMILY = 'data/iluma-family_level.csv'
-GENUS = 'data/iluma-genus.csv'
+PYLUM = '../data/ilumina_pylum.csv'
+FAMILY = '../data/iluma-family_level.csv'
+GENUS = '../data/iluma-genus.csv'
 
 def crea_mat_threshold(df, cas, threshold):
 
