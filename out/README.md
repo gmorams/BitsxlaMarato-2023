@@ -1,4 +1,5 @@
-Carpeta amb els resultats gràfics obtinguts, tots a partir dels scripts en phython, que si s'executen a la terminal amb     `python3 nomfitxer.py` ja surt la gràfica.
+Carpeta amb els resultats gràfics obtinguts, tots a partir dels scripts en phython, que si s'executen a la terminal amb la comanda
+`python3 nomfitxer.py` ja surt la gràfica.
 
 
 ![correlation_graph_CON-genus](https://github.com/peremateu/BitsxlaMarato2023/assets/95536223/378b1263-b545-423d-a71a-7bf1962512e5)
