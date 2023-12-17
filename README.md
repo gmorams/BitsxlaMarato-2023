@@ -25,7 +25,7 @@ En els directoris del repositori es pot trobar:
 
 `data` els datasets
 
-`òut`les imatges de les gràfiques obtingudes
+`out` les imatges de les gràfiques obtingudes
 
 `src` els codis fets en python
 
