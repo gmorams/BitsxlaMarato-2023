@@ -7,8 +7,8 @@ import pygraphviz as pgv
 
 
 
-THRESHOLD_CON_PYLUM = 0
-THRESHOLD_UAB_PYLUM = 0
+THRESHOLD_CON_PYLUM = .01
+THRESHOLD_UAB_PYLUM = .01
 
 THRESHOLD_CON_FAMILY = 1.4
 THRESHOLD_UAB_FAMILY= 4.5
@@ -59,7 +59,7 @@ def crea_mat_corr(df, cas, threshold):
 
     print(eliminated_columns)
 
-    filtered_df = df[filtered_columns]
+    filtered_df = df_2[filtered_columns]
 
     correlation_matrix = filtered_df.corr()
 
@@ -145,10 +145,10 @@ def create_graph(corr_matrix):
     graph.draw(output_image_file, format="png", prog="circo")
 
 
-df = pd.read_csv(PYLUM)
+df = pd.read_csv(GENUS)
 #crea_mat_threshold(df, UAB, THRESHOLD_UAB_PYLUM)
 
-corr_mat = crea_mat_corr(df, UAB, THRESHOLD_UAB_PYLUM)
+corr_mat = crea_mat_corr(df, UAB, THRESHOLD_UAB_GENUS)
 #print_mat(corr_mat)
 #draw_graph(corr_mat)
 create_graph(corr_mat)
